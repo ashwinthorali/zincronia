@@ -1,0 +1,47 @@
+
+  <script>
+    $('#getPrice').click(function(e){
+        e.preventDefault();
+        $('.priceLoader').removeClass('d-none');
+        $('#mapPrices').addClass('d-none');
+        $('#priceCart').addClass('qd-none');
+        $('#buyNow').addClass('qd-none');
+        $('#removefromcart').addClass('qd-none');
+        shade = $('#shade').val();
+        spec = $('#spec').val();
+        product = $('#product').val();
+        url_pattern = "{% url 'product:getprice' %}";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'shade':shade,
+                'spec':spec,
+                'product':product
+            },
+            success: function (response) {
+                mrp = response.mrp;
+                $('.priceLoader').addClass('d-none');
+                $('#mapPrices').removeClass('d-none');
+                $('#priceCart').removeClass('qd-none');
+                $('#buyNow').removeClass('qd-none');
+                $('#idbuynow').addClass('qd-none');
+                $('#mynumber').addClass('qd-none');
+                $('#removefromcart').removeClass('qd-none');
+                $('#mapPrices').html(
+                    `
+                    <p> $ ${mrp} </p>
+                    `
+                )
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>

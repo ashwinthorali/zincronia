@@ -1,0 +1,192 @@
+
+  <script>
+    $('.addtocartManishft').click(function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/add-to-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                cart_id = response.cart_id;
+                qty = response.items;
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                if (qty > 0){
+                    np2l = "ftnp2l-"+product_id;
+                    qvno = "ftqvno-"+product_id;
+                    $('#'+np2l).val(qty);
+                    $('#'+qvno).val(qty);
+                    inp2l = "ftinp2l-"+product_id;
+                    dnp2l = "ftdnp2l-"+product_id;
+                   
+                    $('#'+np2l).val(qty);
+                    $('#'+inp2l).attr('data-id', cart_id);
+                    $('#'+dnp2l).attr('data-id', cart_id);
+                }
+               
+                p1l = "ftp1l-"+product_id;
+                p2l = "ftp2l-"+product_id;
+                dp2l = "ftdp2l-"+product_id;
+                qvr = "ftqvr-"+product_id;
+                qva = "ftqva-"+product_id;
+                
+                // $('#d'+p1l).attr('data-id', cart_id);
+                $('#'+p1l).addClass('qd-none');
+                $('#'+p2l).removeClass('qd-none');
+                $('#'+dp2l).attr('data-id', cart_id);
+                
+                $('#'+qvr).removeClass('qd-none');
+                $('#'+qva).addClass('qd-none');
+                $('#'+qvr).attr('data-id', cart_id);
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>
+
+<script>
+    $(document).on("click", '.removetocartManishft', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/remove-from-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                p1l = "ftp1l-"+product_id;
+                p2l = "ftp2l-"+product_id;
+                $('#'+p2l).addClass('qd-none');
+                $('#'+p1l).removeClass('qd-none');
+                qvr = "ftqvr-"+product_id;
+                qva = "ftqva-"+product_id;
+                $('#'+qvr).addClass('qd-none');
+                $('#'+qva).removeClass('qd-none');
+                
+                
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+<script>
+    $(document).on("click", '.ftincrease', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        pid = $('#ftmy_productID').val()
+        // alert(name);
+        url_pattern = "/products/increase-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                cart_id = response.cart_id;
+                p2l = "ftnp2l-"+product_id;
+                $('#'+p2l).val(qty);
+            
+                qvno = "ftqvno-"+product_id;
+                $('#'+qvno).val(qty);
+            
+                inp2l = "ftinp2l-"+product_id;
+                dnp2l = "ftdnp2l-"+product_id;
+                qvin = "ftqvic-"+product_id;
+                qvdc = "ftqvdc-"+product_id;
+                
+                $('#'+inp2l).attr('data-id', cart_id);
+                $('#'+dnp2l).attr('data-id', cart_id);
+                $('#'+qvin).attr('data-id', cart_id);
+                $('#'+qvdc).attr('data-id', cart_id);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+
+<script>
+    $(document).on("click", '.ftdecrease', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        pid = $('#ftmy_productID').val();
+        
+        // alert(name);
+        url_pattern = "/products/decrease-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                p2l = "ftnp2l-"+product_id;
+                $('#'+p2l).val(qty);
+                qvno = "ftqvno-"+product_id;
+                $('#'+qvno).val(qty);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>

@@ -1,0 +1,168 @@
+
+  <script>
+    $('.addtocartManish').click(function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/add-to-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                cart_id = response.cart_id;
+                qty = response.items;
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                if (qty > 0){
+                    qvno = "qvno-"+product_id;
+                    $('#'+qvno).val(qty);
+                    
+                }
+               
+                qvr = "qvr-"+product_id;
+                qva = "qva-"+product_id;
+                
+                
+                $('#'+qvr).removeClass('qd-none');
+                $('#'+qva).addClass('qd-none');
+                $('#'+qvr).attr('data-id', cart_id);
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>
+
+<script>
+    $(document).on("click", '.removetocartManish', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/remove-from-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                console.log(product_id)
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                
+                qvr = "qvr-"+product_id;
+                qva = "qva-"+product_id;
+                $('#'+qvr).addClass('qd-none');
+                $('#'+qva).removeClass('qd-none');
+                
+                
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+<script>
+    $(document).on("click", '.increase', function(e){
+        e.preventDefault();
+        // alert('a')
+        name = $(this).data('id');
+        pid = $('#my_productID').val()
+        // alert(name);
+        url_pattern = "/products/increase-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                cart_id = response.cart_id;
+                
+                qvno = "qvno-"+product_id;
+                $('#'+qvno).val(qty);
+                qvin = "qvic-"+product_id;
+                qvdc = "qvdc-"+product_id;
+                
+                $('#'+qvin).attr('data-id', cart_id);
+                $('#'+qvdc).attr('data-id', cart_id);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+
+<script>
+    $(document).on("click", '.decrease', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        pid = $('#my_productID').val();
+        
+        // alert(name);
+        url_pattern = "/products/decrease-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                qvno = "qvno-"+product_id;
+                $('#'+qvno).val(qty);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>

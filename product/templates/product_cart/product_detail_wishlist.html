@@ -1,0 +1,50 @@
+
+  <script>
+    $('.addtowishlist').click(function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        x = this.className
+        url_pattern = "/products/add-to-wishlist/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'className':x,
+            },
+            success: function (response) {
+                product_id = response.pid;
+                flag = response.flag;
+                new_val = response.new_val;
+                $('.wishlist-counter').html(new_val);
+                
+                if (flag == 1){
+                    // $('.wishlist-'+product_id).addClass('bg-incart');
+                    $('.wishlist2-'+product_id).addClass('bg-incart2');
+                    $('.wishlist2-'+product_id).html(`
+                    <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
+                    Added in Wishlist
+                    `);
+                }
+                else{
+                    // $('.wishlist-'+product_id).removeClass('bg-incart');
+                    $('.wishlist2-'+product_id).removeClass('bg-incart2');
+                    $('.wishlist2-'+product_id).html(`
+                    <svg class="quickview__variant--wishlist__svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"></path></svg>
+                    Add to Wishlist`);
+
+                }
+                
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>

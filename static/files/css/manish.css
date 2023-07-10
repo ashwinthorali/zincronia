@@ -1,0 +1,127 @@
+/* .main__logo--img{
+    height: 80px;
+}
+.main__header {
+    background: #fff000!important;
+    background-image: linear-gradient(315deg, #fff000 0%, #f6fc9c 74%);
+}
+.header__bottom {
+    border-top: 1px solid #0b692f;
+    border-bottom: 1px solid #0b692f;
+    background: #fff000;
+}
+.main__header{
+    padding: 0.3 0!important;
+}
+.header__section{
+ border-bottom: 1px #0b692f dotted;
+}
+.slider__content {
+    padding-left: 21rem!important;
+}
+
+body{
+    background: #fff100!important;
+}
+.ft{
+    background: #a33630!important;
+} */
+
+.product__media--preview__items--img.myproduct{
+    height: 60vh!important;
+}
+.product__media--preview__items--img.myproduct2{
+    height: 80vh!important;
+}
+.product__media--nav__items--img{
+    height: 80px;
+}
+.a .swiper-slide .product__media--nav__items .product__media--nav__items--img{
+    height: 100px!important;
+}
+
+.bg-success{
+background: #2987e3;
+}
+
+.texts-white{
+    color: white!important;
+}
+
+.dfloat-right{
+    float: right;
+    background: green;
+    padding: 1px;
+    width: 80px;
+    text-align: center;
+    border-radius: 10px;
+    color: white;
+    font-weight: 400;
+    font-size: 12px;
+
+}
+.bg-incart{
+    background: green;
+    color: white;
+    
+}
+.bg-incart2{
+    color: #2987e3;
+    
+}
+
+.qd-none{
+    display: none!important;
+}
+
+.badge-danger{
+    background: #2987e3!important;
+}
+
+
+.hero__slider--items{
+    height: 67vh!important;
+  }
+
+
+  .gradient-btn{
+             
+        background-image: linear-gradient(to right, #314755 0%, #26a0da  51%, #314755  100%);
+        text-align: center;
+        text-transform: uppercase;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;            
+        box-shadow: 0 0 20px #eee;
+        border-radius: 10px;
+        display: block;
+   
+     
+  }
+
+  .gradient-btn:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .badge-sm{
+    font-size: 8px!important;
+  }
+
+  .breadcrumb__content {
+    position: relative;
+    padding: 25px;
+}
+  @media only screen and (max-width:720px){
+    .hero__slider--items {
+        height: 10vh!important;
+        margin-top: 42px;
+    }
+    .shipping__items2 {
+        width: 100%;
+        -webkit-box-pack: left;
+        -ms-flex-pack: left;
+        justify-content: left;
+    }
+}

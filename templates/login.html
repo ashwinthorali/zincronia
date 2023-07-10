@@ -1,0 +1,75 @@
+    <!-- login -->
+    <!-- Quickview Wrapper -->
+    <div class="modal" id="loginModal" data-animation="slideInUp">
+    <div class="modal-dialog quickview__main--wrapper">
+        <header class="modal-header quickview__header">
+            <button class="close-modal quickview__close--btn" aria-label="close modal" data-close="">✕ </button>
+        </header>
+        <div class="quickview__inner">
+            <div class="row row-cols-lg row-cols-md">
+                    <div class="login__section--inner">
+                        <div class="row row-cols-md-2 row-cols-1">
+                            <div class="col">
+                                <div class="account__login">
+                                    <div class="account__login--header mb-25">
+                                        <h2 class="account__login--header__title h3 mb-10">Login</h2>
+                                        <p class="account__login--header__desc">Login if you area a returning customer.</p>
+                                    </div>
+                                    <form action="{% url 'account:login_user' %}" method="POST" class="account__login--inner">
+                                        {% csrf_token %}
+                                        <input class="account__login--input"  value="" name="username" placeholder="Username" type="text">
+                                        <input class="account__login--input" placeholder="Password" name="password" type="password">
+                                        <div class="account__login--remember__forgot mb-15 d-flex justify-content-between align-items-center">
+                                            <div class="account__login--remember position__relative">
+                                                <input class="checkout__checkbox--input" id="check1" type="checkbox">
+                                                <span class="checkout__checkbox--checkmark"></span>
+                                                <label class="checkout__checkbox--label login__remember--label" for="check1">
+                                                    Remember me</label>
+                                            </div>
+                                            <a href="{% url 'reset_password' %}" class="account__login--forgot" type="submit">Forgot Your Password?</a>
+                                        </div>
+                                        <button class="account__login--btn primary__btn" type="submit">Login</button>
+                                        <div class="account__login--divide">
+                                            <span class="account__login--divide__text">OR</span>
+                                        </div>
+                                        <!-- <div class="account__social container d-flex justify-content-center mb-15">
+                                            <a class="account__social--link facebook" target="_blank" href="#">Facebook</a>
+                                            <a class="account__social--link google" target="_blank" href="#">Google</a>
+                                            <a class="account__social--link twitter" target="_blank" href="#">Twitter</a>
+                                        </div> -->
+                                        <p class="account__login--signup__text">Don,t Have an Account? <button type="submit">Sign up now</button></p>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="account__login register">
+                                    <div class="account__login--header mb-25">
+                                        <h2 class="account__login--header__title h3 mb-10">Create an Account</h2>
+                                        <p class="account__login--header__desc">Register here if you are a new customer</p>
+                                    </div>
+                                    <form class="account__login--inner" action="{% url 'account:createuser' %}" method="POST">
+                                        {% csrf_token %}
+                                        <input class="account__login--input" id="usernames" value="" required placeholder="Username" name="username" type="text">
+                                        <label for="" id="uid" style="color: red;padding-bottom:0px;" class="text-danger d-none">Username already exists!</label>
+                                        <input class="account__login--input" required placeholder="Email Addres" name="email" type="text">
+                                        <label for="">8 letters Alphanumeric password </label>
+                                        <input class="account__login--input" required placeholder="Password" min-value="8" id="password11" name="password1" type="password">
+                                        <input class="account__login--input" required placeholder="Confirm Password" id="password12" name="password2" type="password">
+                                        <label for="" id="dbpass" style="color: red;padding-bottom:0px;" class="text-danger d-none">Password doesnt match!</label>
+                                        <button class="account__login--btn primary__btn mb-10" type="submit">Register  &amp;  Login</button>
+                                        <div class="account__login--remember position__relative">
+                                            <input required class="checkout__checkbox--input" id="check2" type="checkbox">
+                                            <span class="checkout__checkbox--checkmark"></span>
+                                            <label class="checkout__checkbox--label login__remember--label" for="check2">
+                                                I agree to the terms &amp; conditions</label>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- Quickview Wrapper End -->

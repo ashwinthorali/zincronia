@@ -1,0 +1,118 @@
+
+  <script>
+    $('.addtocartManishpd').click(function(e){
+        e.preventDefault();
+        shade = $('#shade').val();
+        spec = $('#spec').val();
+        if (spec == undefined && shade == undefined){
+        sp = 1
+       }
+       else{
+        sp = 12 
+       }
+       product = $('#product').val();
+        
+        url_pattern = "/products/add-to-cart/"+product+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'shade':shade,
+                'spec':spec,
+                'product':product,
+                'sp':sp 
+            },
+            success: function (response) {
+                new_val = response.new_val;
+                qty =  response.items;
+                sp = response.sp;
+                $('#idbuynow').removeClass('qd-none');
+                $('#mynumber').removeClass('qd-none');
+                
+                $('#priceCart').addClass('qd-none');
+                $('#priceCart').html(
+                    `
+                    Update Cart
+                    `
+                );
+                if (sp == 1){
+                    $('#priceCart').addClass('qd-none')
+                    
+                }  
+                $('#mynumber').removeClass('qd-none')
+                $('#numberofitem').val(qty);
+                $('#numberofitem2').html(qty);
+                $('#idbuynow').html(
+                    `    <a href="{% url 'product:mycart' %}" class="mr-2 primary__btn quickview__cart--btn" id="buyNow" >Buy Now</a>
+                         <a href="javascript:void(0);" class="mr-2 primary__btn quickview__cart--btn removetocartManishpd" id="buyNow" ><i class="fa fa-times"></i> </a>
+                    `
+                );    
+                $('.cartDataValue').html(
+                    `
+                    ${new_val}
+                    `
+                )
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>
+
+<script>
+    $(document).on("click", '.removetocartManishpd', function(e){
+        e.preventDefault();
+        shade = $('#shade').val();
+        spec = $('#spec').val();
+        product = $('#product').val();
+        url_pattern = "/products/remove-from-cart/"+product+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'shade':shade,
+                'spec':spec,
+                'product':product
+            },
+            success: function (response) {
+                new_val = response.new_val;
+                qty =  response.items;
+                
+                $('#priceCart').html(
+                    `
+                    Add To Cart
+                    `
+                );
+                $('#priceCart').removeClass('qd-none');
+                
+                $('#mynumber').addClass('qd-none')
+                $('#idbuynow').empty(); 
+                $('.cartDataValue').html(
+                    `
+                    ${new_val}
+                    `
+                )
+                
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+

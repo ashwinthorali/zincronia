@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block seo %}
+<title>All Blogs - The Grand Indian Route</title>
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="All Blogs - The Grand Indian Route">
+<meta property="og:description" content="The best collection of all the blogs delivering valueable insights on India Tour Plan & More.">
+<meta property="og:url" content="Article">
+<meta property="og:site_name" content="The Grand Indian Route">
+<meta property="article:publisher" content="https://www.facebook.com/The-Grand-Indian-Route-1441210602607993/">
+<meta property="article:section" content="Blog">
+<meta property="og:image" content="{% static 'seo/blog/b125/8.jpg' %}">
+<meta property="og:image:secure_url" content="{% static 'seo/blog/b125/8.jpg' %}">
+<meta property="og:image:width" content="327">
+<meta property="og:image:height" content="218">
+<meta property="og:image:alt" content="Blogs - The Grand Indian Route">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="The best collection of blogs delivering valueable insights on India Tour Plan & More.">
+<meta name="twitter:title" content="Blogs - The Grand Indian Route">
+<meta name="twitter:image" content="{% static 'seo/blog/b125/8.jpg' %}">
+<style>
+   .row{
+       padding: 0!important;margin:0!important ;
+   }
+</style>
+{% endblock seo %} 
+{% block css %}
+
+{% endblock css %}
+    
+    
+
+
+{% block body %}
+
+<!-- Start breadcrumb section -->
+<section class="breadcrumb__section breadcrumb__bg">
+  <div class="container">
+      <div class="row row-cols-1">
+          <div class="col">
+              <div class="breadcrumb__content text-center">
+                  <h1 class="breadcrumb__content--title text-white mb-25">From The Blogs</h1>
+                  <ul class="breadcrumb__content--menu d-flex justify-content-center">
+                      <li class="breadcrumb__content--menu__items"><a class="text-white" href="index.html">Home</a></li>
+                      <li class="breadcrumb__content--menu__items"><span class="text-white">Blogs</span></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<!-- End breadcrumb section -->
+
+<!-- Start blog section -->
+<section class="blog__section section--padding">
+  <div class="container">
+      
+      <div class="blog__section--inner">
+          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-2 row-cols-sm-u-2 row-cols-1 mb--n30">
+            
+            {% for ie in data  %}
+            <div class="col mb-30">
+              <div class="blog__items">
+                  <div class="blog__thumbnail">
+                      <a class="blog__thumbnail--link" href="{% url 'blog:blog_detail' ie.slug %}"><img class="blog__thumbnail--img"
+                         src="{{ie.image.url}}" alt="blog-img"></a>
+                  </div>
+                  <div class="blog__content">
+                      <span class="blog__content--meta">{{ie.published}}</span>
+                      <h3 class="blog__content--title"><a href="{% url 'blog:blog_detail' ie.slug %}">{{ie.h1}}</a></h3>
+                      <a class="blog__content--btn primary__btn" href="{% url 'blog:blog_detail' ie.slug %}">Read more </a>
+                  </div>
+              </div>
+          </div>
+         
+            {% endfor %}
+              
+          </div>
+          {% if data.has_other_pages %}
+          <div class="pagination__area bg__gray--color">
+              <nav class="pagination justify-content-center">
+                
+                  <ul class="pagination__wrapper d-flex align-items-center justify-content-center">
+                    {% if data.has_previous %}
+                      <li class="pagination__list">
+                        <a href="?page={{ data.previous_page_number }}" class="pagination__item--arrow  link ">
+                            <svg xmlns="http://www.w3.org/2000/svg"  width="22.51" height="20.443" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg>
+                            <span class="visually-hidden">pagination arrow</span>
+                        </a>
+                      <li>
+                    
+                      {% else %}
+                      <li class="pagination__list">
+                          <a href="#" class="pagination__item--arrow  link ">
+                              <svg xmlns="http://www.w3.org/2000/svg"  width="22.51" height="20.443" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/></svg>
+                              <span class="visually-hidden">pagination arrow</span>
+                          </a>
+                      <li>
+                    
+                      {% endif %}
+                  
+                    
+                        {% for i in data.paginator.page_range %}
+			                    {% if data.number == i %}
+                            <li class="pagination__list"><span class="pagination__item pagination__item--current">1</span></li>
+                          {% else %}
+                          <li class="pagination__list"><a href="?page={{ i }}" class="pagination__item link">2</a></li>
+                      
+                          {% endif %}
+                        {% endfor %}
+                      {% if data.has_next %}
+                      <li class="pagination__list">
+                        <a href="?page={{ data.next_page_number }}" class="pagination__item--arrow  link ">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22.51" height="20.443" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M268 112l144 144-144 144M392 256H100"/></svg>
+                              <span class="visually-hidden">pagination arrow</span>
+                          </a>
+                      <li>
+                      {% else %}
+                      <li class="pagination__list">
+                          <a href="#" class="pagination__item--arrow  link ">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="22.51" height="20.443" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M268 112l144 144-144 144M392 256H100"/></svg>
+                              <span class="visually-hidden">pagination arrow</span>
+                          </a>
+                      <li>
+                      {% endif %}
+                      
+                      
+                  </ul>
+              </nav>
+          </div>
+          {% endif %}
+      </div>
+  </div>
+</section>
+<!-- End blog section -->
+
+   <!-- Start shipping section -->
+   <section class="shipping__section2 shipping__style3 section--padding">
+    <div class="container">
+        <div class="shipping__section2--inner shipping__style3--inner d-flex justify-content-between">
+            <div class="shipping__items2 d-flex align-items-center">
+                <div class="shipping__items2--icon">
+                    <img src="{% static 'files/assurance.png' %}" alt="Image">
+                </div>
+                <div class="shipping__items2--content">
+                    <h2 class="shipping__items2--content__title h3">Quality assurance and support</h2>
+
+                </div>
+            </div>
+            <div class="shipping__items2 d-flex align-items-center">
+                <div class="shipping__items2--icon">
+                    <img src="{% static 'files/customer-service.png' %}" alt="Image">
+                </div>
+                <div class="shipping__items2--content">
+                    <h2 class="shipping__items2--content__title h3">Dedication to customer satisfaction</h2>
+                    
+                </div>
+            </div>
+            <div class="shipping__items2 d-flex align-items-center">
+                <div class="shipping__items2--icon">
+                    <img src="{% static 'files/project-management.png' %}" alt="Image">
+                </div>
+                <div class="shipping__items2--content">
+                    <h2 class="shipping__items2--content__title h3">Embracing innovation</h2>
+                   
+                </div>
+            </div>
+            <div class="shipping__items2 d-flex align-items-center">
+                <div class="shipping__items2--icon">
+                    <img src="{% static 'files/protection.png' %}" alt="Image">
+                </div>
+                <div class="shipping__items2--content">
+                    <h2 class="shipping__items2--content__title h3">A commitment to patient safety and comfort</h2>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End shipping section -->
+{% endblock body %}
+    
+
+
+{% block javascript %}
+
+{% endblock javascript %}
+    

@@ -1,0 +1,102 @@
+{% load static %}
+<div class="">
+    <div class="container-fluid">
+        <div class="header__bottom--inner position__relative d-none d-lg-flex justify-content-between align-items-center">
+            <div class="header__menu">
+                <nav class="header__menu--navigation">
+                    <ul class="d-flex">
+                        <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="{% url 'home:home' %}">Home 
+                                
+                            </a>
+                          
+                        </li>
+                        <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="{% url 'home:about' %}">About </a>  
+                        </li>
+                        
+                        {% for ie in topmenu  %}
+                        <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="#">{{ie.menu_name}} 
+                                <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg"
+                                 width="12" height="7.41" viewbox="0 0 12 7.41">
+                                    <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6"
+                                     transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"></path>
+                                </svg>
+                            </a>
+                            
+                            {% if ie.submenu %}
+                           
+                                 <ul class="header__sub--menu">
+                                    {% for i in  ie.submenu %}
+                                    <li class="header__sub--menu__items"><a href="{% url 'product:product_list' i.slug %}"
+                                         class="header__sub--menu__link"> {{i.sub_menu_name}} </a></li>
+                                    {% endfor %}
+                                </ul>
+                                    
+                            {% endif %}
+                            {% if ie.direct_menu %}
+                           
+                                 <ul class="header__sub--menu">
+                                    {% for i in  ie.direct_menu %}
+                                    <li class="header__sub--menu__items"><a href="{% url 'product:product_detail' i.slug %}" class="header__sub--menu__link"> {{i.product_name}} </a></li>
+                                    {% endfor %}
+                                </ul>
+                                    
+                            {% endif %}
+                                
+                        </li>
+                        
+                        {% endfor %}
+                            
+                        <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="#">Resource Center 
+                                <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" viewbox="0 0 12 7.41">
+                                    <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6" transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"></path>
+                                </svg>
+                            </a>
+                            <ul class="header__sub--menu">
+                                <li class="header__sub--menu__items"><a href="{% url 'blog:blog_list' %}" class="header__sub--menu__link">Blogs</a></li>
+                                <li class="header__sub--menu__items"><a href="{% url 'home:gallery' %}" class="header__sub--menu__link">Gallery</a></li>
+                            </ul>
+                        </li>
+                         <!-- account -->
+                         <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="#">Account
+                              
+                              <svg class="menu__arrowdown--icon" xmlns="http://www.w3.org/2000/svg" width="12" height="7.41" 
+                              viewbox="0 0 12 7.41">
+                                <path d="M16.59,8.59,12,13.17,7.41,8.59,6,10l6,6,6-6Z"
+                                 transform="translate(-6 -8.59)" fill="currentColor" opacity="0.7"></path>
+                              </svg>
+                                  
+                            </a>
+                            
+                                
+                                
+                                {% if user.is_authenticated %}
+                                <ul class="header__sub--menu">
+                                    <li class="header__sub--menu__items"><a href="{% url 'account:dashboard' %}" class="header__sub--menu__link">Dashboard</a></li>
+                                    <li class="header__sub--menu__items"><a href="{% url 'home:byebye' %}" class="header__sub--menu__link">Logout</a></li>
+                                </ul>    
+                                {% else %}
+                                <ul class="header__sub--menu">
+                                    <li c   lass="header__sub--menu__items"><a href="javascript:void(0);"  data-open="loginModal" class="header__sub--menu__link">Login</a></li>
+                                </ul>
+                                {% endif %}
+                                    
+                                    
+                            
+                                
+                        </li>
+                        <!-- end account -->
+
+                        <li class="header__menu--items">
+                            <a class="header__menu--link text-white" href="{% url 'home:contact' %}">Contact </a>  
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

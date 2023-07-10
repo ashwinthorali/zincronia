@@ -1,0 +1,193 @@
+
+  <script>
+    $('.addtocartManishbs').click(function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/add-to-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                cart_id = response.cart_id;
+                qty = response.items;
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                
+                if (qty > 0){
+                    np2l = "bsnp2l-"+product_id;
+                    qvno = "bsqvno-"+product_id;
+                    $('#'+np2l).val(qty);
+                    $('#'+qvno).val(qty);
+                    inp2l = "bsinp2l-"+product_id;
+                    dnp2l = "bsdnp2l-"+product_id;
+                   
+                    $('#'+np2l).val(qty);
+                    $('#'+inp2l).attr('data-id', cart_id);
+                    $('#'+dnp2l).attr('data-id', cart_id);
+                }
+               
+                p1l = "bsp1l-"+product_id;
+                p2l = "bsp2l-"+product_id;
+                dp2l = "bsdp2l-"+product_id;
+                qvr = "bsqvr-"+product_id;
+                qva = "bsqva-"+product_id;
+                
+                // $('#d'+p1l).attr('data-id', cart_id);
+                $('#'+p1l).addClass('qd-none');
+                $('#'+p2l).removeClass('qd-none');
+                $('#'+dp2l).attr('data-id', cart_id);
+                
+                $('#'+qvr).removeClass('qd-none');
+                $('#'+qva).addClass('qd-none');
+                $('#'+qvr).attr('data-id', cart_id);
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        
+        });
+        $(this).removeData();
+    });
+
+    
+ </script>
+
+<script>
+    $(document).on("click", '.removetocartManishbs', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        url_pattern = "/products/remove-from-cart/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name
+            },
+            success: function (response) {
+                total_item = response.items;
+                product_id = response.pid;
+                p1l = "bsp1l-"+product_id;
+                p2l = "bsp2l-"+product_id;
+                new_val = response.new_val;
+                $('.cartDataValue').html(new_val);
+                $('#'+p2l).addClass('qd-none');
+                $('#'+p1l).removeClass('qd-none');
+                qvr = "bsqvr-"+product_id;
+                qva = "bsqva-"+product_id;
+                $('#'+qvr).addClass('qd-none');
+                $('#'+qva).removeClass('qd-none');
+                
+                
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+<script>
+    $(document).on("click", '.bsincrease', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        pid = $('#bsmy_productID').val()
+        // alert(name);
+        url_pattern = "/products/increase-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                cart_id = response.cart_id;
+                p2l = "bsnp2l-"+product_id;
+                $('#'+p2l).val(qty);
+            
+                qvno = "bsqvno-"+product_id;
+                $('#'+qvno).val(qty);
+            
+                inp2l = "bsinp2l-"+product_id;
+                dnp2l = "bsdnp2l-"+product_id;
+                qvin = "bsqvic-"+product_id;
+                qvdc = "bsqvdc-"+product_id;
+                
+                $('#'+inp2l).attr('data-id', cart_id);
+                $('#'+dnp2l).attr('data-id', cart_id);
+                $('#'+qvin).attr('data-id', cart_id);
+                $('#'+qvdc).attr('data-id', cart_id);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
+
+
+
+<script>
+    $(document).on("click", '.bsdecrease', function(e){
+        e.preventDefault();
+        name = $(this).data('id');
+        pid = $('#bsmy_productID').val();
+        
+        // alert(name);
+        url_pattern = "/products/decrease-item/"+name+"/";
+        $.ajax({
+            type: "GET",
+            url: url_pattern,
+            data:{
+                'name':name,
+                'pid':pid,
+            },
+            success: function (response) {
+                qty = response.qty;
+                product_id = response.pid;
+                console.log(qty)
+                p2l = "bsnp2l-"+product_id;
+                $('#'+p2l).val(qty);
+                qvno = "bsqvno-"+product_id;
+                $('#'+qvno).val(qty);
+            
+                   
+            },
+            error:function (data) {
+                console.log('An error occurred.');
+                
+            },
+        });
+        
+        $(this).removeData();
+        
+    });
+
+    
+ </script>
